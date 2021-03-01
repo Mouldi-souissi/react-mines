@@ -1,12 +1,11 @@
 import React from "react";
+import Square from "./Square";
 
 const Grid = ({ grid }) => {
   return (
     <div className="grid-container">
       {grid.map((square, i) => (
-        <div className="grid-item" key={i}>
-          {square.inner === "bomb" ? "b" : square.inner}
-        </div>
+        <Square square={square} key={i} />
       ))}
     </div>
   );
