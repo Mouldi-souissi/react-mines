@@ -14,14 +14,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
@@ -40,15 +40,15 @@
 /* grid */
 
 .container {
-  background: black;
+  /* background: black; */
   display: inline-block;
-  border: 5px solid black;
+  border: 2px solid grey;
 }
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 80px);
   grid-template-rows: repeat(3, 80px);
-  grid-gap: 5px;
+  /* grid-gap: 1px; */
 }
 .cell {
   /* center the cell content */
@@ -58,14 +58,21 @@
   font-family: Arial;
   font-size: 3rem;
   font-weight: bold;
-  background: rgb(192, 186, 186);
+  /* background: rgb(192, 186, 186); */
+  border-style: inset;
+  border-width: 3px;
+  border-color: grey;
 }
 .cell:hover {
   cursor: pointer;
 }
+.cell:focus {
+  outline: none;
+}
 
 .active {
   background: white;
+  border-style: none;
 }
 
 .transparent {

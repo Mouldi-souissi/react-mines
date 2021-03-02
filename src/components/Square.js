@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 
-const Square = ({ square }) => {
+const Square = ({ square, handleLose, lose }) => {
   // state
   const [show, setShow] = useState(false);
   const [flag, setFlag] = useState(false);
+
+  // handleclick
+  const handleClick = () => {
+    setShow(true);
+    handleLose(square.inner);
+  };
 
   const numColor = () => {
     switch (square.inner) {
@@ -18,25 +24,36 @@ const Square = ({ square }) => {
 
       case 3:
         return "red";
+      default:
+        return "red";
     }
   };
 
   return (
     <button
       className={`cell ${square.inner === "bomb" ? "bomb" : "num"} ${
-        show && "active"
+        (show || lose) && "active"
       } ${numColor()}`}
-      onClick={() => setShow(true)}
+      onClick={handleClick}
       onContextMenu={() => setFlag(!flag)}
+      type="button"
     >
-      {show ? (
+      {show || lose ? (
         square.inner === "bomb" ? (
-          <i class="fa fa-bomb" aria-hidden="true" />
+          <i
+            class="fa fa-bomb"
+            aria-hidden="true"
+            style={{ color: "black", fontSize: "30px" }}
+          />
         ) : (
           square.inner
         )
       ) : flag ? (
-        <i class="fa fa-flag" aria-hidden="true" style={{ color: "grey" }} />
+        <i
+          class="fa fa-flag"
+          aria-hidden="true"
+          style={{ color: "black", fontSize: "25px" }}
+        />
       ) : (
         " "
       )}
