@@ -38,25 +38,45 @@
 }
 
 /* grid */
-.grid-container {
+
+.container {
+  background: black;
+  display: inline-block;
+  border: 5px solid black;
+}
+.grid {
   display: grid;
-  grid-template-columns: auto auto auto;
-  background-color: black;
-  padding: 30px;
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
+  grid-gap: 5px;
 }
-.grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 50px;
-  font-size: 30px;
-  text-align: center;
+.cell {
+  /* center the cell content */
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-family: Arial;
+  font-size: 3rem;
+  font-weight: bold;
+  background: rgb(192, 186, 186);
 }
-.grid-item:hover {
+.cell:hover {
   cursor: pointer;
 }
-.num {
-  color: black;
+
+.active {
+  background: white;
 }
-.bomb {
+
+.transparent {
+  color: transparent;
+}
+.red {
   color: red;
+}
+.blue {
+  color: blue;
+}
+.green {
+  color: green;
 }
