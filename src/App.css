@@ -46,9 +46,15 @@
 }
 .grid {
   display: grid;
+  /* grid-gap: 1px; */
+}
+.small {
   grid-template-columns: repeat(3, 80px);
   grid-template-rows: repeat(3, 80px);
-  /* grid-gap: 1px; */
+}
+.big {
+  grid-template-columns: repeat(9, 80px);
+  grid-template-rows: repeat(9, 80px);
 }
 .cell {
   /* center the cell content */
@@ -61,7 +67,7 @@
   /* background: rgb(192, 186, 186); */
   border-style: inset;
   border-width: 3px;
-  border-color: grey;
+  border-color: rgb(179, 178, 178);
 }
 .cell:hover {
   cursor: pointer;
@@ -72,7 +78,7 @@
 
 .active {
   background: white;
-  border-style: none;
+  border: 1px solid grey;
 }
 
 .transparent {

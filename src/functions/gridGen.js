@@ -18,7 +18,11 @@ const gridGen = (gridSize, totalBombs) => {
       let duplicate = bombs.find((bomb) => bomb.x === x && bomb.y === y)
         ? true
         : false;
-      if (!duplicate) bombs = [...bombs, { x, y }];
+      if (!duplicate) {
+        bombs = [...bombs, { x, y }];
+      } else {
+        i--;
+      }
     }
     return bombs;
   };
@@ -47,7 +51,9 @@ const gridGen = (gridSize, totalBombs) => {
   // pushing bombs into grid
   const addBombs = () => {
     let bombs = bombGen();
-    bombs.map((bomb) => grid.push({ x: bomb.x, y: bomb.y, inner: "bomb" }));
+    bombs.map((bomb) =>
+      grid.push({ x: bomb.x, y: bomb.y, inner: "bomb", hidden: true })
+    );
     return grid;
   };
   addBombs();
@@ -81,7 +87,7 @@ const gridGen = (gridSize, totalBombs) => {
     for (let x = 0; x < gridSize; x++) {
       for (let y = 0; y < gridSize; y++) {
         if (!grid.find((el) => el.x === x && el.y === y)) {
-          grid.push({ x, y, inner: numbersGen({ x, y }) });
+          grid.push({ x, y, inner: numbersGen({ x, y }), hidden: true });
         }
       }
     }

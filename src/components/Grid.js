@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Square from "./Square";
 
-const Grid = ({ grid }) => {
-  const [lose, setLose] = useState(false);
-  const handleLose = (inner) => {
-    if (inner === "bomb") {
-      setLose(true);
-    }
-  };
+const Grid = ({ grid, handleLose, lose }) => {
   return (
     <div className="container">
-      <div className="grid">
+      <div className="grid big">
         {grid.map((square, i) => (
           <Square square={square} key={i} lose={lose} handleLose={handleLose} />
         ))}

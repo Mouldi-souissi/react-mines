@@ -15,13 +15,10 @@ const Square = ({ square, handleLose, lose }) => {
     switch (square.inner) {
       case 0:
         return "transparent";
-
       case 1:
         return "blue";
-
       case 2:
         return "green";
-
       case 3:
         return "red";
       default:
@@ -31,9 +28,7 @@ const Square = ({ square, handleLose, lose }) => {
 
   return (
     <button
-      className={`cell ${square.inner === "bomb" ? "bomb" : "num"} ${
-        (show || lose) && "active"
-      } ${numColor()}`}
+      className={`cell ${(show || lose) && "active"} ${numColor()}`}
       onClick={handleClick}
       onContextMenu={() => setFlag(!flag)}
       type="button"
@@ -41,7 +36,7 @@ const Square = ({ square, handleLose, lose }) => {
       {show || lose ? (
         square.inner === "bomb" ? (
           <i
-            class="fa fa-bomb"
+            className="fa fa-bomb"
             aria-hidden="true"
             style={{ color: "black", fontSize: "30px" }}
           />
@@ -50,7 +45,7 @@ const Square = ({ square, handleLose, lose }) => {
         )
       ) : flag ? (
         <i
-          class="fa fa-flag"
+          className="fa fa-flag"
           aria-hidden="true"
           style={{ color: "black", fontSize: "25px" }}
         />
