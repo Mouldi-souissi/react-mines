@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-const Square = ({ square, handleLose, lose }) => {
+const Square = ({ square, handleLose, lose, showSquare }) => {
   // state
-  const [show, setShow] = useState(false);
   const [flag, setFlag] = useState(false);
 
   // handleclick
   const handleClick = () => {
-    setShow(true);
+    // setShow(true);
+    showSquare(square.x, square.y);
     handleLose(square.inner);
   };
 
@@ -28,12 +28,12 @@ const Square = ({ square, handleLose, lose }) => {
 
   return (
     <button
-      className={`cell ${(show || lose) && "active"} ${numColor()}`}
+      className={`cell ${(!square.hidden || lose) && "active"} ${numColor()}`}
       onClick={handleClick}
       onContextMenu={() => setFlag(!flag)}
       type="button"
     >
-      {show || lose ? (
+      {!square.hidden || lose ? (
         square.inner === "bomb" ? (
           <i
             className="fa fa-bomb"
