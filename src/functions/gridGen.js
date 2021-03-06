@@ -95,5 +95,4 @@ const gridGen = (gridSize, totalBombs) => {
   };
   return finalGrid();
 };
-
 export default gridGen;

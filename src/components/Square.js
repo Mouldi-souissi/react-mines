@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 
-const Square = ({ square, handleLose, lose, showSquare }) => {
+const Square = ({ square, handleLose, lose, showSquare, openEmptySquares }) => {
   // state
   const [flag, setFlag] = useState(false);
 
   // handleclick
   const handleClick = () => {
     // setShow(true);
-    showSquare(square.x, square.y);
+    showSquare(square);
     handleLose(square.inner);
+    // openEmptySquares(square);
   };
 
   const numColor = () => {

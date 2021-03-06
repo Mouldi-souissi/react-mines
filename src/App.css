@@ -49,8 +49,8 @@
   /* grid-gap: 1px; */
 }
 .small {
-  grid-template-columns: repeat(3, 80px);
-  grid-template-rows: repeat(3, 80px);
+  grid-template-columns: repeat(5, 80px);
+  grid-template-rows: repeat(5, 80px);
 }
 .big {
   grid-template-columns: repeat(9, 80px);
