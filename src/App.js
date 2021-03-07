@@ -14,14 +14,17 @@ function App() {
 
   // show clicked square
   const showSquare = (square) => {
-    // setGrid(
-    //   grid.map((square) =>
-    //     square.x === x && square.y === y ? { ...square, hidden: false } : square
-    //   )
-    // );
-
     setGrid(gameEvents(grid, "left", square, gridSize));
   };
+  // put flag
+  const flag = (square) => {
+    setGrid(gameEvents(grid, "right", square, gridSize));
+  };
+  // open !flag
+  const openFlags = (square) => {
+    setGrid(gameEvents(grid, "double", square, gridSize));
+  };
+
   // revealing the grid after clicking on a bomb
   const handleLose = (inner) => {
     if (inner === "bomb") {
@@ -59,46 +62,6 @@ function App() {
     winHandler();
   }, [grid]);
 
-  const openEmptySquares = (square) => {
-    const squaresAround = (x, y) => {
-      let squares = [
-        { x: x + 1, y },
-        { x: x - 1, y },
-        { x, y: y + 1 },
-        { x, y: y - 1 },
-        { x: x + 1, y: y + 1 },
-        { x: x - 1, y: y - 1 },
-        { x: x + 1, y: y - 1 },
-        { x: x - 1, y: y + 1 },
-      ];
-      return squares.filter(
-        (square) =>
-          square.x >= 0 &&
-          square.y >= 0 &&
-          square.x < gridSize &&
-          square.y < gridSize
-      );
-    };
-    if (square.inner === 0) {
-      let squares = squaresAround(square.x, square.y);
-
-      squares.map((el) => showSquare(el.x, el.y));
-      // for (let i = 0; i < squares.length; i++) {
-      //   for (let j = 0; j < grid.length; j++) {
-      //     if (squares[i].x === grid[j].x && squares[i].y === grid[j].y) {
-      //       setGrid(
-      //         grid.map((sq) =>
-      //           sq.x === grid[j].x && sq.y === grid[j].y
-      //             ? { ...sq, hidden: false }
-      //             : sq
-      //         )
-      //       );
-      //     }
-      //   }
-      // }
-    }
-  };
-
   return (
     <div className="App">
       <header className="App-header">
@@ -109,7 +72,8 @@ function App() {
           handleLose={handleLose}
           lose={lose}
           showSquare={showSquare}
-          openEmptySquares={openEmptySquares}
+          flag={flag}
+          openFlags={openFlags}
         />
         {lose && <p>GameOver</p>}
         {win && <p>You Win</p>}

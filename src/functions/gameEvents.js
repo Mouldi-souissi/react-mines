@@ -9,7 +9,7 @@ const gameEvents = (grid, click, square, gridSize) => {
     );
   };
 
-  // around 2
+  // squares arround
   const arround = (x, y) => {
     let realSquares = [];
     let squares = [
@@ -43,34 +43,21 @@ const gameEvents = (grid, click, square, gridSize) => {
     let squares = arround(square.x, square.y);
     for (let i = 0; i < squares.length; i++) {
       grid = showSquare({ x: squares[i].x, y: squares[i].y });
-
       if (squares[i].inner === 0 && square.hidden === true) {
         openEmpty(squares[i]);
-        console.log("recursive");
       }
     }
-
     return grid;
   };
 
-  //   squares arround
-  const squaresAround = (x, y) => {
-    let squares = [
-      { x: x + 1, y },
-      { x: x - 1, y },
-      { x, y: y + 1 },
-      { x, y: y - 1 },
-      { x: x + 1, y: y + 1 },
-      { x: x - 1, y: y - 1 },
-      { x: x + 1, y: y - 1 },
-      { x: x - 1, y: y + 1 },
-    ];
-    return squares.filter(
-      (square) =>
-        square.x >= 0 &&
-        square.y >= 0 &&
-        square.x < gridSize &&
-        square.y < gridSize
+  // put flag
+  const flag = (square) => {
+    let x = square.x;
+    let y = square.y;
+    return grid.map((square) =>
+      square.x === x && square.y === y
+        ? { ...square, flag: !square.flag }
+        : square
     );
   };
 
@@ -78,11 +65,20 @@ const gameEvents = (grid, click, square, gridSize) => {
   if (click === "left") {
     grid = showSquare(square);
     if (square.inner === 0) {
-      // let squares = squaresAround(square.x, square.y);
-      // for (let i = 0; i < squares.length; i++) {
-      //   grid = showSquare({ x: squares[i].x, y: squares[i].y });
-      // }
       grid = openEmpty(square);
+    }
+  }
+  // right click
+  if (click === "right") {
+    grid = flag(square);
+  }
+  // double click
+  if (click === "double") {
+    let squares = arround(square.x, square.y).filter((el) => el.hidden);
+    let nbFlags = squares.filter((el) => el.flag).length;
+    for (let i = 0; i < squares.length; i++) {
+      if (nbFlags === square.inner && !squares[i].flag)
+        grid = showSquare({ x: squares[i].x, y: squares[i].y });
     }
   }
   return grid;

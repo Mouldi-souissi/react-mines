@@ -52,7 +52,13 @@ const gridGen = (gridSize, totalBombs) => {
   const addBombs = () => {
     let bombs = bombGen();
     bombs.map((bomb) =>
-      grid.push({ x: bomb.x, y: bomb.y, inner: "bomb", hidden: true })
+      grid.push({
+        x: bomb.x,
+        y: bomb.y,
+        inner: "bomb",
+        hidden: true,
+        flag: false,
+      })
     );
     return grid;
   };
@@ -87,7 +93,13 @@ const gridGen = (gridSize, totalBombs) => {
     for (let x = 0; x < gridSize; x++) {
       for (let y = 0; y < gridSize; y++) {
         if (!grid.find((el) => el.x === x && el.y === y)) {
-          grid.push({ x, y, inner: numbersGen({ x, y }), hidden: true });
+          grid.push({
+            x,
+            y,
+            inner: numbersGen({ x, y }),
+            hidden: true,
+            flag: false,
+          });
         }
       }
     }

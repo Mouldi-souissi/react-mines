@@ -1,7 +1,7 @@
 import React from "react";
 import Square from "./Square";
 
-const Grid = ({ grid, handleLose, lose, showSquare, openEmptySquares }) => {
+const Grid = ({ grid, handleLose, lose, showSquare, flag, openFlags }) => {
   return (
     <div className="container">
       <div className="grid small">
@@ -12,7 +12,8 @@ const Grid = ({ grid, handleLose, lose, showSquare, openEmptySquares }) => {
             lose={lose}
             handleLose={handleLose}
             showSquare={showSquare}
-            openEmptySquares={openEmptySquares}
+            flag={flag}
+            openFlags={openFlags}
           />
         ))}
       </div>

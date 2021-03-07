@@ -1,15 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Square = ({ square, handleLose, lose, showSquare, openEmptySquares }) => {
-  // state
-  const [flag, setFlag] = useState(false);
-
+const Square = ({ square, handleLose, lose, showSquare, flag, openFlags }) => {
   // handleclick
   const handleClick = () => {
-    // setShow(true);
     showSquare(square);
     handleLose(square.inner);
-    // openEmptySquares(square);
   };
 
   const numColor = () => {
@@ -31,7 +26,8 @@ const Square = ({ square, handleLose, lose, showSquare, openEmptySquares }) => {
     <button
       className={`cell ${(!square.hidden || lose) && "active"} ${numColor()}`}
       onClick={handleClick}
-      onContextMenu={() => setFlag(!flag)}
+      onContextMenu={() => flag(square)}
+      onDoubleClick={() => openFlags(square)}
       type="button"
     >
       {!square.hidden || lose ? (
@@ -44,7 +40,7 @@ const Square = ({ square, handleLose, lose, showSquare, openEmptySquares }) => {
         ) : (
           square.inner
         )
-      ) : flag ? (
+      ) : square.flag ? (
         <i
           className="fa fa-flag"
           aria-hidden="true"
