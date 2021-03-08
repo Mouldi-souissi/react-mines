@@ -12,6 +12,8 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+/* digital numbers font */
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
 
 .App-header {
   /* background-color: #282c34; */
@@ -22,6 +24,7 @@
   /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: black;
+  font-family: "Orbitron", sans-serif;
 }
 
 .App-link {

@@ -8,29 +8,23 @@ const BombContextProvider = (props) => {
   // state
   const [grid, setGrid] = useState([]);
   const [start, setStart] = useState(false);
-  const [lose, setLose] = useState(false);
+  const [loss, setloss] = useState(false);
   const [win, setWin] = useState(false);
   const gridSize = 5;
   const totalBombs = 3;
 
   // right,left and double click events
   const clicks = (square, click) => {
-    setGrid(gameEvents(grid, click, square, gridSize));
-  };
-
-  // handle lose
-  const handleLose = (square) => {
-    if (square.inner === "bomb") {
-      setLose(true);
-      // setGrid(grid.map((el) => el.hidden = false));
-    }
+    let result = gameEvents(grid, click, square, gridSize);
+    setGrid(result.grid);
+    setloss(result.loss);
   };
 
   // handle new game
   const newGame = () => {
     setWin(false);
     setStart(!start);
-    setLose(false);
+    setloss(false);
     setGrid([]);
   };
 
@@ -46,18 +40,16 @@ const BombContextProvider = (props) => {
       if (
         grid.filter((square) => square.hidden === false).length ===
           Math.pow(gridSize, 2) - totalBombs &&
-        !lose
+        !loss
       ) {
         setWin(true);
       }
     };
     handleWin();
-  }, [grid, lose]);
+  }, [grid, loss]);
 
   return (
-    <BombContext.Provider
-      value={{ grid, clicks, handleLose, lose, win, newGame }}
-    >
+    <BombContext.Provider value={{ grid, clicks, loss, win, newGame }}>
       {props.children}
     </BombContext.Provider>
   );

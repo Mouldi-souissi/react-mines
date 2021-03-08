@@ -1,17 +1,26 @@
 const gameEvents = (grid, click, square, gridSize) => {
+  // vars
+  let loss = false;
+  let win = false;
+
   // show clicked square
   const showSquare = (square) => {
     let x = square.x;
     let y = square.y;
-
+    // check loss
+    if (square.inner === "bomb") {
+      loss = true;
+    }
+    console.log(square.inner);
     return grid.map((square) =>
       square.x === x && square.y === y ? { ...square, hidden: false } : square
     );
   };
 
-  // squares arround
-  const arround = (x, y) => {
+  // show adjacent squares
+  const showAdjacentSquares = (x, y) => {
     let realSquares = [];
+
     let squares = [
       { x: x + 1, y },
       { x: x - 1, y },
@@ -23,8 +32,10 @@ const gameEvents = (grid, click, square, gridSize) => {
       { x: x - 1, y: y + 1 },
     ].filter(
       (square) =>
+        // negative limit
         square.x >= 0 &&
         square.y >= 0 &&
+        // positive limit
         square.x < gridSize &&
         square.y < gridSize
     );
@@ -38,20 +49,24 @@ const gameEvents = (grid, click, square, gridSize) => {
     return realSquares;
   };
 
-  // open empty recursive
-  const openEmpty = (square) => {
-    let squares = arround(square.x, square.y);
+  // show empty squares
+  const showEmptySquares = (square) => {
+    let squares = showAdjacentSquares(square.x, square.y);
     for (let i = 0; i < squares.length; i++) {
-      grid = showSquare({ x: squares[i].x, y: squares[i].y });
+      grid = showSquare({
+        x: squares[i].x,
+        y: squares[i].y,
+        inner: squares[i].inner,
+      });
       if (squares[i].inner === 0 && square.hidden === true) {
-        openEmpty(squares[i]);
+        showEmptySquares(squares[i]);
       }
     }
     return grid;
   };
 
-  // put flag
-  const flag = (square) => {
+  // put a flag on a square
+  const putFlag = (square) => {
     let x = square.x;
     let y = square.y;
     return grid.map((square) =>
@@ -65,22 +80,29 @@ const gameEvents = (grid, click, square, gridSize) => {
   if (click === "left") {
     grid = showSquare(square);
     if (square.inner === 0) {
-      grid = openEmpty(square);
+      grid = showEmptySquares(square);
     }
   }
   // right click
   if (click === "right") {
-    grid = flag(square);
+    grid = putFlag(square);
   }
   // double click
   if (click === "double") {
-    let squares = arround(square.x, square.y).filter((el) => el.hidden);
+    let squares = showAdjacentSquares(square.x, square.y).filter(
+      (el) => el.hidden
+    );
     let nbFlags = squares.filter((el) => el.flag).length;
     for (let i = 0; i < squares.length; i++) {
       if (nbFlags === square.inner && !squares[i].flag)
-        grid = showSquare({ x: squares[i].x, y: squares[i].y });
+        grid = showSquare({
+          x: squares[i].x,
+          y: squares[i].y,
+          inner: squares[i].inner,
+        });
     }
   }
-  return grid;
+
+  return { grid, loss };
 };
 export default gameEvents;
