@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { BombContext } from "../context/BombContext";
 
-const Square = ({ square, handleLose, lose, showSquare, flag, openFlags }) => {
+const Square = ({ square }) => {
+  const { clicks, handleLose, lose } = useContext(BombContext);
   // handleclick
   const handleClick = () => {
-    showSquare(square);
-    handleLose(square.inner);
+    clicks(square, "left");
+    handleLose(square);
   };
-
+  // styling numbers
   const numColor = () => {
     switch (square.inner) {
       case 0:
@@ -26,8 +28,8 @@ const Square = ({ square, handleLose, lose, showSquare, flag, openFlags }) => {
     <button
       className={`cell ${(!square.hidden || lose) && "active"} ${numColor()}`}
       onClick={handleClick}
-      onContextMenu={() => flag(square)}
-      onDoubleClick={() => openFlags(square)}
+      onContextMenu={() => clicks(square, "right")}
+      onDoubleClick={() => clicks(square, "double")}
       type="button"
     >
       {!square.hidden || lose ? (
