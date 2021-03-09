@@ -2,7 +2,7 @@ import "./App.css";
 import Grid from "./components/Grid";
 import { useContext } from "react";
 import { BombContext } from "./context/BombContext";
-import Timer from "./components/Timer";
+// import Timer from "./components/Timer";
 
 function App() {
   const { grid, loss, win, newGame } = useContext(BombContext);

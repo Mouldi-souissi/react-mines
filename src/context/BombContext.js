@@ -15,9 +15,10 @@ const BombContextProvider = (props) => {
 
   // right,left and double click events
   const clicks = (square, click) => {
-    let result = gameEvents(grid, click, square, gridSize);
+    let result = gameEvents(grid, click, square, gridSize, totalBombs);
     setGrid(result.grid);
     setloss(result.loss);
+    setWin(result.win);
   };
 
   // handle new game
@@ -33,20 +34,6 @@ const BombContextProvider = (props) => {
     let grid = gridGen(gridSize, totalBombs);
     setGrid(grid);
   }, [start]);
-
-  // effect win
-  useEffect(() => {
-    const handleWin = () => {
-      if (
-        grid.filter((square) => square.hidden === false).length ===
-          Math.pow(gridSize, 2) - totalBombs &&
-        !loss
-      ) {
-        setWin(true);
-      }
-    };
-    handleWin();
-  }, [grid, loss]);
 
   return (
     <BombContext.Provider value={{ grid, clicks, loss, win, newGame }}>

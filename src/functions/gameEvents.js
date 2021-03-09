@@ -1,4 +1,4 @@
-const gameEvents = (grid, click, square, gridSize) => {
+const gameEvents = (grid, click, square, gridSize, totalBombs) => {
   // vars
   let loss = false;
   let win = false;
@@ -7,11 +7,11 @@ const gameEvents = (grid, click, square, gridSize) => {
   const showSquare = (square) => {
     let x = square.x;
     let y = square.y;
+
     // check loss
     if (square.inner === "bomb") {
       loss = true;
     }
-    console.log(square.inner);
     return grid.map((square) =>
       square.x === x && square.y === y ? { ...square, hidden: false } : square
     );
@@ -103,6 +103,22 @@ const gameEvents = (grid, click, square, gridSize) => {
     }
   }
 
-  return { grid, loss };
+  // check win
+  if (
+    grid.filter((square) => square.hidden === false).length ===
+      Math.pow(gridSize, 2) - totalBombs &&
+    !loss
+  ) {
+    win = true;
+  }
+
+  // put flags on remaining squares after win
+  if (win) {
+    grid = grid.map((square) =>
+      !square.flag ? { ...square, flag: true } : square
+    );
+  }
+
+  return { grid, loss, win };
 };
 export default gameEvents;
