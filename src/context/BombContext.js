@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 import gridGen from "../functions/gridGen";
 import gameEvents from "../functions/gameEvents";
 
@@ -10,8 +10,26 @@ const BombContextProvider = (props) => {
   const [start, setStart] = useState(false);
   const [loss, setloss] = useState(false);
   const [win, setWin] = useState(false);
-  const gridSize = 5;
-  const totalBombs = 3;
+  const [gridSize, setGridSize] = useState(3);
+  const [totalBombs, setTotalBombs] = useState(2);
+
+  // set gridsize
+  const handleGridsize = (size) => {
+    setGridSize(size);
+    let totalB = () => {
+      switch (size) {
+        case 3:
+          return 2;
+        case 5:
+          return 5;
+        case 10:
+          return 60;
+        default:
+          return 3;
+      }
+    };
+    setTotalBombs(totalB);
+  };
 
   // right,left and double click events
   const clicks = (square, click) => {
@@ -22,21 +40,28 @@ const BombContextProvider = (props) => {
   };
 
   // handle new game
-  const newGame = () => {
+  const startGame = () => {
     setWin(false);
-    setStart(!start);
     setloss(false);
-    setGrid([]);
+    setGrid(gridGen(gridSize, totalBombs));
+    setStart(true);
   };
 
-  // effect generate grid
-  useEffect(() => {
-    let grid = gridGen(gridSize, totalBombs);
-    setGrid(grid);
-  }, [start]);
-
   return (
-    <BombContext.Provider value={{ grid, clicks, loss, win, newGame }}>
+    <BombContext.Provider
+      value={{
+        grid,
+        clicks,
+        loss,
+        win,
+        startGame,
+        start,
+        setStart,
+        handleGridsize,
+        gridSize,
+        totalBombs,
+      }}
+    >
       {props.children}
     </BombContext.Provider>
   );

@@ -21,7 +21,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
+  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: black;
   font-family: "Orbitron", sans-serif;
@@ -42,7 +42,7 @@
 
 /* grid */
 
-.container {
+.container-grid {
   /* background: black; */
   display: inline-block;
   border: 2px solid grey;
@@ -52,12 +52,16 @@
   /* grid-gap: 1px; */
 }
 .small {
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
+}
+.medium {
   grid-template-columns: repeat(5, 80px);
   grid-template-rows: repeat(5, 80px);
 }
 .big {
-  grid-template-columns: repeat(9, 80px);
-  grid-template-rows: repeat(9, 80px);
+  grid-template-columns: repeat(10, 80px);
+  grid-template-rows: repeat(10, 80px);
 }
 .cell {
   /* center the cell content */

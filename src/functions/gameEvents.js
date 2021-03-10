@@ -83,10 +83,12 @@ const gameEvents = (grid, click, square, gridSize, totalBombs) => {
       grid = showEmptySquares(square);
     }
   }
+
   // right click
   if (click === "right") {
     grid = putFlag(square);
   }
+
   // double click
   if (click === "double") {
     let squares = showAdjacentSquares(square.x, square.y).filter(
