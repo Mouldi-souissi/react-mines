@@ -20,7 +20,6 @@ const gameEvents = (grid, click, square, gridSize, totalBombs) => {
   // show adjacent squares
   const showAdjacentSquares = (x, y) => {
     let realSquares = [];
-
     let squares = [
       { x: x + 1, y },
       { x: x - 1, y },
@@ -51,6 +50,8 @@ const gameEvents = (grid, click, square, gridSize, totalBombs) => {
 
   // show empty squares
   const showEmptySquares = (square) => {
+    grid = showSquare(square);
+
     let squares = showAdjacentSquares(square.x, square.y);
     for (let i = 0; i < squares.length; i++) {
       grid = showSquare({
@@ -58,10 +59,15 @@ const gameEvents = (grid, click, square, gridSize, totalBombs) => {
         y: squares[i].y,
         inner: squares[i].inner,
       });
-      if (squares[i].inner === 0 && square.hidden === true) {
+      if (
+        squares[i].inner === 0 &&
+        square.hidden === true
+        // squares.filter((el) => !el.hidden).length === squares.length
+      ) {
         showEmptySquares(squares[i]);
       }
     }
+
     return grid;
   };
 
@@ -78,8 +84,9 @@ const gameEvents = (grid, click, square, gridSize, totalBombs) => {
 
   //left click
   if (click === "left") {
-    grid = showSquare(square);
-    if (square.inner === 0) {
+    if (square.inner !== 0) {
+      grid = showSquare(square);
+    } else {
       grid = showEmptySquares(square);
     }
   }

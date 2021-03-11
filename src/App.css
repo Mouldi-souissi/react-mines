@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
 }
@@ -16,7 +21,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
 
 .App-header {
-  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -99,4 +103,13 @@
 }
 .green {
   color: green;
+}
+
+button:focus {
+  outline: 0 !important;
+}
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none;
 }

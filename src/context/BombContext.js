@@ -11,7 +11,13 @@ const BombContextProvider = (props) => {
   const [loss, setloss] = useState(false);
   const [win, setWin] = useState(false);
   const [gridSize, setGridSize] = useState(3);
-  const [totalBombs, setTotalBombs] = useState(2);
+  const [totalBombs, setTotalBombs] = useState(1);
+  let [seconds, setSeconds] = useState(0);
+
+  // increment timer
+  const incrementTimer = (seconds) => {
+    setSeconds(seconds);
+  };
 
   // set gridsize
   const handleGridsize = (size) => {
@@ -19,11 +25,11 @@ const BombContextProvider = (props) => {
     let totalB = () => {
       switch (size) {
         case 3:
-          return 2;
+          return 1;
         case 5:
-          return 5;
+          return 1;
         case 10:
-          return 60;
+          return 1;
         default:
           return 3;
       }
@@ -45,6 +51,7 @@ const BombContextProvider = (props) => {
     setloss(false);
     setGrid(gridGen(gridSize, totalBombs));
     setStart(true);
+    setSeconds(0);
   };
 
   return (
@@ -60,6 +67,8 @@ const BombContextProvider = (props) => {
         handleGridsize,
         gridSize,
         totalBombs,
+        incrementTimer,
+        seconds,
       }}
     >
       {props.children}

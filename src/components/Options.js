@@ -14,7 +14,7 @@ const Options = () => {
       <div className="mode-options col-6 mx-auto" onChange={handleChange}>
         <div className="mb-3">Choose mode :</div>
         <select className="form-select" name="mode">
-          <option Value="3">easy</option>
+          <option value="3">easy</option>
           <option value="5">medium</option>
           <option value="10">hard</option>
         </select>

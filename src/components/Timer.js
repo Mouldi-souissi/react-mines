@@ -1,24 +1,21 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { BombContext } from "../context/BombContext";
 
 const Timer = () => {
-  let [seconds, setSeconds] = useState(1);
-  const { win, loss } = useContext(BombContext);
+  const { win, loss, incrementTimer, seconds } = useContext(BombContext);
 
   useEffect(() => {
     let interval = null;
-    if (!loss) {
-      if (!win) {
-        interval = setInterval(() => {
-          setSeconds((seconds) => seconds + 1);
-        }, 1000);
-      }
-    } else if (loss && seconds !== 0) {
+    if (!(loss || win)) {
+      interval = setInterval(() => {
+        incrementTimer((seconds) => seconds + 1);
+      }, 1000);
+    } else if ((loss || win) && seconds !== 0) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [win, loss, seconds]);
+  }, [win, loss, seconds, incrementTimer]);
 
-  return <div>Time:{seconds}</div>;
+  return <div>Time: {seconds}</div>;
 };
 export default Timer;

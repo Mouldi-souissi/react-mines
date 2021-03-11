@@ -18,6 +18,7 @@ const Grid = ({ grid }) => {
         return "small";
     }
   };
+
   return (
     <div className="container-grid">
       <div className={`grid ${gridStyle()}`}>
