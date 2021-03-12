@@ -11,7 +11,7 @@ const BombContextProvider = (props) => {
   const [loss, setloss] = useState(false);
   const [win, setWin] = useState(false);
   const [gridSize, setGridSize] = useState(3);
-  const [totalBombs, setTotalBombs] = useState(1);
+  const [totalBombs, setTotalBombs] = useState(2);
   let [seconds, setSeconds] = useState(0);
 
   // increment timer
@@ -25,11 +25,11 @@ const BombContextProvider = (props) => {
     let totalB = () => {
       switch (size) {
         case 3:
-          return 1;
+          return 2;
         case 5:
-          return 3;
+          return 4;
         case 10:
-          return 1;
+          return 20;
         default:
           return 3;
       }
