@@ -19,12 +19,11 @@ const gridGen = (gridSize, totalBombs) => {
         ? true
         : false;
       if (!duplicate) {
-        bombs = [...bombs, { x, y }];
+        grid.push({ x, y, inner: "bomb", hidden: true, flag: false });
       } else {
         i--;
       }
     }
-    return bombs;
   };
 
   // squares around
@@ -47,22 +46,6 @@ const gridGen = (gridSize, totalBombs) => {
         square.y < gridSize
     );
   };
-
-  // pushing bombs into grid
-  const addBombs = () => {
-    let bombs = bombGen();
-    bombs.map((bomb) =>
-      grid.push({
-        x: bomb.x,
-        y: bomb.y,
-        inner: "bomb",
-        hidden: true,
-        flag: false,
-      })
-    );
-    return grid;
-  };
-  addBombs();
 
   // numbers generator
   const numbersGen = (square) => {
@@ -90,6 +73,9 @@ const gridGen = (gridSize, totalBombs) => {
 
   // final grid
   const finalGrid = () => {
+    // generating bombs
+    bombGen();
+    // generating numbers
     for (let x = 0; x < gridSize; x++) {
       for (let y = 0; y < gridSize; y++) {
         if (!grid.find((el) => el.x === x && el.y === y)) {

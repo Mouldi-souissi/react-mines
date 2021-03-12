@@ -27,7 +27,7 @@ const BombContextProvider = (props) => {
         case 3:
           return 1;
         case 5:
-          return 1;
+          return 3;
         case 10:
           return 1;
         default:
