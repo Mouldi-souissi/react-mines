@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="container">
+      <div className="container disable-zoom">
         <div className="d-flex mt-3 ">
           <h1 className="mb-5">Bombs</h1>
           <i

@@ -85,3 +85,7 @@ button:focus {
   justify-content: center;
   margin-top: 20px;
 }
+
+.disable-zoom {
+  touch-action: manipulation;
+}
