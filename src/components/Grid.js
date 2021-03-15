@@ -21,7 +21,7 @@ const Grid = ({ grid }) => {
 
   return (
     <div className="container-grid">
-      <div className={`grid ${gridStyle()}`}>
+      <div className={`grid ${gridStyle()} `}>
         {grid.map((square, i) => (
           <Square square={square} key={i} />
         ))}
