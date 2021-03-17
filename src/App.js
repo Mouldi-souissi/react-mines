@@ -15,6 +15,7 @@ function App() {
     start,
     setStart,
     totalBombs,
+    gridSize,
   } = useContext(BombContext);
 
   // count number of bombs left
@@ -36,7 +37,11 @@ function App() {
         </div>
         <div className="row">
           {start ? (
-            <div className="game mb-5 d-flex flex-column justify-content-center align-items-center">
+            <div
+              className={`game mb-5 d-flex flex-column justify-content-center ${
+                gridSize !== 10 && "align-items-center"
+              } `}
+            >
               <div className="d-flex justify-content-between col-8 mx-auto">
                 <Timer />
                 <button
